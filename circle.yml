@@ -1,0 +1,5 @@
+machine:
+  python:
+test:
+  override:
+    - tox
