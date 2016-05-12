@@ -13,6 +13,8 @@ package_requires = [
     'errbot',
 ]
 test_requires = [
+    'pytest-pep8',
+    'pytest-flakes',
     'pytest',
 ]
 
