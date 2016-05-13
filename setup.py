@@ -13,9 +13,10 @@ package_requires = [
     'errbot',
 ]
 test_requires = [
-    'pytest-pep8',
-    'pytest-flakes',
+    # 'pytest-flakes',
+    # 'pytest-cov',
     'pytest',
+    'pytest-pep8',
 ]
 
 
@@ -44,7 +45,7 @@ class PyTest(TestCommand):
         TestCommand.initialize_options(self)
         self.pytest_args = [
             '--pep8',
-            '--flakes',
+            # '--flakes',
         ]
 
     def finalize_options(self):
