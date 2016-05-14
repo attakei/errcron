@@ -15,7 +15,7 @@ package_requires = [
 test_requires = [
     'pytest-pep8',
     'pytest-flakes',
-    # 'pytest-cov',
+    'pytest-cov',
     'pytest',
 ]
 
@@ -46,6 +46,7 @@ class PyTest(TestCommand):
         self.pytest_args = [
             '--pep8',
             '--flakes',
+            '--con=errcron',
         ]
 
     def finalize_options(self):
