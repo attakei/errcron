@@ -12,6 +12,10 @@ class CronJob(object):
         self.trigger_time = None
         """datetime value by trigger to run job"""
 
+    def set_triggers(self, trigger_format, trigger_time):
+        self.trigger_format = trigger_format
+        self.trigger_time = trigger_time
+
     def is_runnable(self, time):
         """Check whether job run action at specified time
 
