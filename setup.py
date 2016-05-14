@@ -46,7 +46,7 @@ class PyTest(TestCommand):
         self.pytest_args = [
             '--pep8',
             '--flakes',
-            '--con=errcron',
+            '--cov=errcron',
         ]
 
     def finalize_options(self):
