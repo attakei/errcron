@@ -13,10 +13,10 @@ package_requires = [
     # 'errbot',
 ]
 test_requires = [
+    'pytest-pep8',
     # 'pytest-flakes',
     # 'pytest-cov',
     'pytest',
-    # 'pytest-pep8',
 ]
 
 
@@ -44,7 +44,7 @@ class PyTest(TestCommand):
     def initialize_options(self):
         TestCommand.initialize_options(self)
         self.pytest_args = [
-            # '--pep8',
+            '--pep8',
             # '--flakes',
         ]
 
@@ -75,6 +75,7 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=package_requires,
     tests_require=test_requires,
+    extras_require={'test': test_requires},
     cmdclass={
         'test': PyTest,
     },
