@@ -12,6 +12,18 @@ class CronJob(object):
         self.trigger_time = None
         """datetime value by trigger to run job"""
 
+    def __repr__(self):
+        if self.trigger_format is None or self.trigger_time is None:
+            trigger_str = ''
+        else:
+            trigger_str = '{}->{}'.format(
+                self.trigger_format,
+                self.trigger_time,
+            )
+        return 'CronJob(trigger=[{}])'.format(
+            trigger_str,
+        )
+
     def set_triggers(self, trigger_format, trigger_time):
         self.trigger_format = trigger_format
         self.trigger_time = trigger_time
