@@ -1,3 +1,9 @@
+# -*- coding:utf8 -*-
+from __future__ import (
+    division, print_function, absolute_import, unicode_literals
+)
+import sys
+import pytest
 from datetime import datetime
 from errcron.cronjob import CronJob
 
@@ -27,3 +33,9 @@ def test_set_triggers():
     assert job.is_runnable(dt) is True
     dt = datetime(2000, 1, 1, 0, 1, 1)
     assert job.is_runnable(dt) is False
+    for keys in (
+        (None, '1'),
+        ('1', None),
+    ):
+        with pytest.raises(ValueError):
+            job.set_triggers(*keys)

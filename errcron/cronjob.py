@@ -1,4 +1,7 @@
 # -*- coding:utf8 -*-
+from __future__ import (
+    division, print_function, absolute_import, unicode_literals
+)
 """cron job structure
 """
 
@@ -25,6 +28,18 @@ class CronJob(object):
         )
 
     def set_triggers(self, trigger_format, trigger_time):
+        """Set trigger_format and trigger_time (recommend)
+
+        :param trigger_format: datetime format used by strftime
+        :type trigger_format: basestring
+        :param trigger_format: datetime values returned by strftime
+        :type trigger_time: basestring
+        :raises: ValueError
+        """
+        if not isinstance(trigger_format, basestring):
+            raise ValueError
+        if not isinstance(trigger_time, basestring):
+            raise ValueError
         self.trigger_format = trigger_format
         self.trigger_time = trigger_time
 
