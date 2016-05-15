@@ -2,9 +2,11 @@
 from __future__ import (
     division, print_function, absolute_import, unicode_literals
 )
+import types
 import pytest
 from datetime import datetime
 from errcron.cronjob import CronJob
+import stub
 
 
 def test_for_display():
@@ -38,3 +40,22 @@ def test_set_triggers():
     ):
         with pytest.raises(ValueError):
             job.set_triggers(*keys)
+
+
+def test_set_action():
+    job = CronJob()
+    job.set_action('stub.echo_hello')
+    assert type(job.action) is types.FunctionType
+
+
+def test_set_action_not_func():
+    with pytest.raises(AttributeError):
+        job = CronJob()
+        job.set_action('stub.echo_hello_not')
+
+
+def test_do_action():
+    job = CronJob()
+    job.set_action('stub.echo_datetime')
+    dt = datetime(2000, 1, 1, 1, 1, 1)
+    assert job.do_action(dt) == '2000-01-01'

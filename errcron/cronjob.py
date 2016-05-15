@@ -4,6 +4,7 @@ from __future__ import (
 )
 """cron job structure
 """
+import importlib
 import six
 
 
@@ -15,6 +16,8 @@ class CronJob(object):
         """datetime format by trigger to run job"""
         self.trigger_time = None
         """datetime value by trigger to run job"""
+        self.action = None
+        """Job action"""
 
     def __repr__(self):
         if self.trigger_format is None or self.trigger_time is None:
@@ -53,3 +56,12 @@ class CronJob(object):
         :rtype: boolean
         """
         return time.strftime(self.trigger_format) == self.trigger_time
+
+    def set_action(self, action):
+        action_module = '.'.join(action.split('.')[:-1])
+        action_module = importlib.import_module(action_module)
+        action = action.split('.')[-1]
+        self.action = getattr(action_module, action)
+
+    def do_action(self, do_time):
+        return self.action(do_time)
