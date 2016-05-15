@@ -6,7 +6,6 @@ import types
 import pytest
 from datetime import datetime
 from errcron.cronjob import CronJob
-import stub
 
 
 def test_for_display():
@@ -45,7 +44,7 @@ def test_set_triggers():
 def test_set_action():
     job = CronJob()
     job.set_action('stub.echo_hello')
-    assert type(job.action) is types.FunctionType
+    assert isinstance(job.action, types.FunctionType)
 
 
 def test_set_action_not_func():
