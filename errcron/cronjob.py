@@ -4,6 +4,7 @@ from __future__ import (
 )
 """cron job structure
 """
+import six
 
 
 class CronJob(object):
@@ -36,9 +37,9 @@ class CronJob(object):
         :type trigger_time: basestring
         :raises: ValueError
         """
-        if not isinstance(trigger_format, basestring):
+        if not isinstance(trigger_format, six.string_types):
             raise ValueError
-        if not isinstance(trigger_time, basestring):
+        if not isinstance(trigger_time, six.string_types):
             raise ValueError
         self.trigger_format = trigger_format
         self.trigger_time = trigger_time
