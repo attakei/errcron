@@ -11,7 +11,7 @@ class CrontabMixin(object):
     def activate_crontab(self):
         """Activate polling function and register first crontab
         """
-        pass
+        self._crontab = []
 
     def poll_crontab(self):
         """Check crontab and run target jobs
