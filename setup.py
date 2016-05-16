@@ -10,13 +10,14 @@ from setuptools.command.test import test as TestCommand
 
 here = os.path.abspath(os.path.dirname(__file__))
 package_requires = [
-    'errbot',
+    # 'errbot',
+    'six',
 ]
 test_requires = [
-    # 'pytest-flakes',
-    # 'pytest-cov',
     'pytest',
     'pytest-pep8',
+    'pytest-flakes',
+    'pytest-cov',
 ]
 
 
@@ -45,7 +46,8 @@ class PyTest(TestCommand):
         TestCommand.initialize_options(self)
         self.pytest_args = [
             '--pep8',
-            # '--flakes',
+            '--flakes',
+            '--cov=errcron',
         ]
 
     def finalize_options(self):
@@ -75,6 +77,7 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=package_requires,
     tests_require=test_requires,
+    extras_require={'test': test_requires},
     cmdclass={
         'test': PyTest,
     },
