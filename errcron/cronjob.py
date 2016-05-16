@@ -57,11 +57,12 @@ class CronJob(object):
         """
         return time.strftime(self.trigger_format) == self.trigger_time
 
-    def set_action(self, action):
+    def set_action(self, action, *args):
         action_module = '.'.join(action.split('.')[:-1])
         action_module = importlib.import_module(action_module)
         action = action.split('.')[-1]
         self.action = getattr(action_module, action)
+        self.action_args = args
 
     def do_action(self, do_time):
-        return self.action(do_time)
+        return self.action(do_time, *self.action_args)
