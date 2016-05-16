@@ -11,6 +11,7 @@ from setuptools.command.test import test as TestCommand
 here = os.path.abspath(os.path.dirname(__file__))
 package_requires = [
     # 'errbot',
+    'six',
 ]
 test_requires = [
     'pytest-pep8',
