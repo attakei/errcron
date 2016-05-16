@@ -13,7 +13,6 @@ class CrontabMixin(object):
         """
         pass
 
-
     def poll_crontab(self):
         """Check crontab and run target jobs
         """
