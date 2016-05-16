@@ -14,10 +14,10 @@ package_requires = [
     'six',
 ]
 test_requires = [
+    'pytest',
     'pytest-pep8',
     'pytest-flakes',
     'pytest-cov',
-    'pytest',
 ]
 
 
