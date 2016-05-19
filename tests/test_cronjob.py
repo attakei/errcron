@@ -57,11 +57,11 @@ def test_do_action():
     job = CronJob()
     job.set_action('stub.echo_datetime')
     dt = datetime(2000, 1, 1, 1, 1, 1)
-    assert job.do_action(dt) == '2000-01-01'
+    assert job.do_action(None, dt) == '2000-01-01'
 
 
 def test_do_action_with_arg():
     job = CronJob()
     job.set_action('stub.echo_datetime_with_head', 'sample')
     dt = datetime(2000, 1, 1, 1, 1, 1)
-    assert job.do_action(dt) == 'sample2000-01-01'
+    assert job.do_action(None, dt) == 'sample2000-01-01'
