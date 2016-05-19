@@ -64,5 +64,5 @@ class CronJob(object):
         self.action = getattr(action_module, action)
         self.action_args = args
 
-    def do_action(self, do_time):
-        return self.action(do_time, *self.action_args)
+    def do_action(self, plugin, do_time):
+        return self.action(plugin, do_time, *self.action_args)
