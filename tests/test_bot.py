@@ -33,3 +33,22 @@ def test_polled_once(capsys):
         plugin.poll_crontab()
         out, err = capsys.readouterr()
         assert out == '2016-01-01'
+
+
+def test_activate_from_crontab_strings(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '%H 00 stub.print_datetime sample',
+            '%H 01 stub.print_datetime sample',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+            self.start_poller(30, self.poll_crontab)
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == '2016-01-01'
