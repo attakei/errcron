@@ -35,4 +35,4 @@ License
 
 Errbot is available as open source software and released under the GPL v3 license.
 
-See `full license file<./LICENSE>`_.
+See `full license file <./LICENSE>`_.

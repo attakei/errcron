@@ -66,7 +66,7 @@ class PyTest(TestCommand):
 setup(
     name='errcron',
     version=find_version('errcron/__init__.py'),
-    url='https://github.com/attakei/errbot-crontab',
+    url='https://github.com/attakei/errcron',
     description='Crontab implementation for Errbot',
     long_description=read_file(os.path.join(here, 'README.rst')),
     author='attakei',
