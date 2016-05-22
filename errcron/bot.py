@@ -23,7 +23,7 @@ class CrontabMixin(object):
         """Check crontab and run target jobs
         """
         polled_time = datetime.datetime.now()
-        for cronjob in self._crontab:
-            if not cronjob.is_runnable(polled_time):
+        for job in self._crontab:
+            if not job.is_runnable(polled_time):
                 continue
-            cronjob.action(self, polled_time)
+            job.action(self, polled_time)
