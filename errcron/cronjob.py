@@ -65,7 +65,9 @@ class CronJob(object):
         self.action_args = args
 
     def do_action(self, plugin, do_time):
-        return self.action(plugin, do_time, *self.action_args)
+        if len(self.action_args) > 0:
+            return self.action(plugin, do_time, *self.action_args)
+        return self.action(plugin, do_time)
 
 
 def load_from_string(crontab):
