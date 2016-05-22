@@ -11,4 +11,5 @@ def post_message(plugin, polled_time, identity, message):
     :type identity: str
     :type message: str
     """
-    pass
+    user = plugin.build_identifier(identity)
+    return plugin.send(user, message)
