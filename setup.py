@@ -11,12 +11,14 @@ from setuptools.command.test import test as TestCommand
 here = os.path.abspath(os.path.dirname(__file__))
 package_requires = [
     # 'errbot',
+    'six',
 ]
 test_requires = [
+    'pytest',
     'pytest-pep8',
     'pytest-flakes',
     'pytest-cov',
-    'pytest',
+    'freezegun',
 ]
 
 
@@ -64,7 +66,7 @@ class PyTest(TestCommand):
 setup(
     name='errcron',
     version=find_version('errcron/__init__.py'),
-    url='https://github.com/attakei/errbot-crontab',
+    url='https://github.com/attakei/errcron',
     description='Crontab implementation for Errbot',
     long_description=read_file(os.path.join(here, 'README.rst')),
     author='attakei',
