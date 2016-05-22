@@ -1,3 +1,6 @@
+import six
+
+
 def echo_hello():
     pass
 
@@ -8,3 +11,7 @@ def echo_datetime(plugin, polled_time):
 
 def echo_datetime_with_head(plugin, polled_time, prefix):
     return prefix + polled_time.strftime('%Y-%m-%d')
+
+
+def print_datetime(plugin, polled_time):
+    six.print_(polled_time.strftime('%Y-%m-%d'), end='')

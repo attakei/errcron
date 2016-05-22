@@ -1,6 +1,7 @@
 # -*- coding:utf8 -*-
 """Bot class extensions
 """
+import datetime
 
 
 class CrontabMixin(object):
@@ -11,9 +12,13 @@ class CrontabMixin(object):
     def activate_crontab(self):
         """Activate polling function and register first crontab
         """
-        pass
+        self._crontab = []
 
     def poll_crontab(self):
         """Check crontab and run target jobs
         """
-        pass
+        polled_time = datetime.datetime.now()
+        for cronjob in self._crontab:
+            if not cronjob.is_runnable(polled_time):
+                continue
+            cronjob.action(self, polled_time)

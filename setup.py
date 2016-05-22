@@ -18,6 +18,7 @@ test_requires = [
     'pytest-pep8',
     'pytest-flakes',
     'pytest-cov',
+    'freezegun',
 ]
 
 
