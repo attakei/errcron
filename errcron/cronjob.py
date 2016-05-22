@@ -66,3 +66,14 @@ class CronJob(object):
 
     def do_action(self, plugin, do_time):
         return self.action(plugin, do_time, *self.action_args)
+
+
+def load_from_string(crontab):
+    args = crontab.split()
+    job = CronJob()
+    trigger_format = args.pop(0)
+    trigger_time = args.pop(0)
+    job.set_triggers(trigger_format, trigger_time)
+    action = args.pop(0)
+    job.set_action(action, args)
+    return job
