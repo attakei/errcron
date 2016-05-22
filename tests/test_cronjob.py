@@ -5,7 +5,8 @@ from __future__ import (
 import types
 import pytest
 from datetime import datetime
-from errcron.cronjob import CronJob
+from errcron.cronjob import CronJob, load_from_string
+import stub
 
 
 def test_for_display():
@@ -65,3 +66,19 @@ def test_do_action_with_arg():
     job.set_action('stub.echo_datetime_with_head', 'sample')
     dt = datetime(2000, 1, 1, 1, 1, 1)
     assert job.do_action(None, dt) == 'sample2000-01-01'
+
+
+def test_cronjob_fromstring():
+    def _ok():
+        job = load_from_string('%H 01 stub.echo_datetime')
+        assert isinstance(job, CronJob) is True
+        assert job.trigger_format == '%H'
+        assert job.trigger_time == '01'
+        assert job.action == stub.echo_datetime
+
+    def _ng_not_str():
+        with pytest.raises(AttributeError):
+            load_from_string(1)
+
+    _ok()
+    _ng_not_str()
