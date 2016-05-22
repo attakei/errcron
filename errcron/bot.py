@@ -18,6 +18,7 @@ class CrontabMixin(object):
             for crontab_spec in self.CRONTAB:
                 job = cronjob.load_from_string(crontab_spec)
                 self._crontab.append(job)
+        self.start_poller(60, self.poll_crontab)
 
     def poll_crontab(self):
         """Check crontab and run target jobs
@@ -26,4 +27,4 @@ class CrontabMixin(object):
         for job in self._crontab:
             if not job.is_runnable(polled_time):
                 continue
-            job.action(self, polled_time)
+            job.do_action(self, polled_time)

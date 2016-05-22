@@ -80,7 +80,9 @@ class CronJob(object):
         :type do_time: datetime.datetime
         :return: Returned value from action
         """
-        return self.action(plugin, do_time, *self.action_args)
+        if len(self.action_args) > 0:
+            return self.action(plugin, do_time, *self.action_args)
+        return self.action(plugin, do_time)
 
 
 def load_from_string(crontab):
@@ -97,5 +99,5 @@ def load_from_string(crontab):
     trigger_time = args.pop(0)
     job.set_triggers(trigger_format, trigger_time)
     action = args.pop(0)
-    job.set_action(action, args)
+    job.set_action(action, *args)
     return job
