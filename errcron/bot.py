@@ -27,4 +27,4 @@ class CrontabMixin(object):
         for job in self._crontab:
             if not job.is_runnable(polled_time):
                 continue
-            job.action(self, polled_time)
+            job.do_action(self, polled_time)
