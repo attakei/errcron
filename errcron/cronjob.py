@@ -58,6 +58,13 @@ class CronJob(object):
         return time.strftime(self.trigger_format) == self.trigger_time
 
     def set_action(self, action, *args):
+        """Set action and arguments to run in triggered time
+
+        :param action: function path as anction
+        :type action: str
+        :param args: function arguments
+        :type args: list or tuple
+        """
         action_module = '.'.join(action.split('.')[:-1])
         action_module = importlib.import_module(action_module)
         action = action.split('.')[-1]
@@ -65,10 +72,25 @@ class CronJob(object):
         self.action_args = args
 
     def do_action(self, plugin, do_time):
+        """Run cronjob action with plugin
+
+        :param plugin: running Errbot plugin
+        :type plugin: errbot.BotPlugin
+        :param do_time: action triggered time
+        :type do_time: datetime.datetime
+        :return: Returned value from action
+        """
         return self.action(plugin, do_time, *self.action_args)
 
 
 def load_from_string(crontab):
+    """Load cronjob from single string
+
+    :param crontab: crontab string(trigger_format, trigger_time, function, args)
+    :type crontab: str
+    :return: Cronjob
+    :rtype: errcron.cronjob.CronJob
+    """
     args = crontab.split()
     job = CronJob()
     trigger_format = args.pop(0)
