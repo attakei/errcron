@@ -75,5 +75,5 @@ def load_from_string(crontab):
     trigger_time = args.pop(0)
     job.set_triggers(trigger_format, trigger_time)
     action = args.pop(0)
-    job.set_action(action, args)
+    job.set_action(action, *args)
     return job
