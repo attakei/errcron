@@ -7,22 +7,19 @@ from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
 
 
-def test_mixin():
-    class Impl(CrontabMixin):
-        def start_poller(self, interval, func):
-            pass
+class MockedImpl(CrontabMixin):
+    def start_poller(self, interval, func):
+        pass
 
-    plugin = Impl()
+
+def test_mixin():
+    plugin = MockedImpl()
     plugin.activate_crontab()
     assert hasattr(plugin, '_crontab') is True
     assert isinstance(plugin._crontab, list) is True
 
 
 def test_polled_once(capsys):
-    class Impl(CrontabMixin):
-        def start_poller(self, interval, func):
-            pass
-
     job1 = CronJob()
     job1.set_action('stub.print_datetime', 'sample')
     job1.set_triggers('%H', '00')
@@ -30,8 +27,27 @@ def test_polled_once(capsys):
     job2.set_action('stub.print_datetime', 'sample')
     job2.set_triggers('%H', '01')
 
-    plugin = Impl()
+    plugin = MockedImpl()
     plugin._crontab = [job1, job2, ]
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == '2016-01-01'
+
+
+def test_activate_from_crontab_strings(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '%H 00 stub.print_datetime sample',
+            '%H 01 stub.print_datetime sample',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+            self.start_poller(30, self.poll_crontab)
+
+    plugin = ActivateImpl()
+    plugin.activate()
     with freeze_time('2016-01-01 00:00:01'):
         plugin.poll_crontab()
         out, err = capsys.readouterr()
