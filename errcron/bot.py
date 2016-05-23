@@ -18,12 +18,14 @@ class CrontabMixin(object):
             for crontab_spec in self.CRONTAB:
                 job = cronjob.load_from_string(crontab_spec)
                 self._crontab.append(job)
-        self.start_poller(60, self.poll_crontab)
+        self.start_poller(30, self.poll_crontab)
 
     def poll_crontab(self):
         """Check crontab and run target jobs
         """
         polled_time = datetime.datetime.now()
+        if polled_time.second >= 30:
+            return
         for job in self._crontab:
             if not job.is_runnable(polled_time):
                 continue
