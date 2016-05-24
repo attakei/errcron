@@ -65,6 +65,8 @@ class CronJob(object):
         :return: Job is runnable or not
         :rtype: boolean
         """
+        if self._crontab is not None:
+            return self._crontab.test(time)
         return time.strftime(self.trigger_format) == self.trigger_time
 
     def set_action(self, action, *args):

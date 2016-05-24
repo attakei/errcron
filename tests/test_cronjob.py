@@ -53,6 +53,15 @@ def test_crontab():
     assert job._crontab.test(datetime(2001, 1, 1, 0, 25)) is True
 
 
+def test_runnig_in_target_time_with_crontab():
+    job = CronJob()
+    job.set_crontab('25 * * * *')
+    dt = datetime(2000, 1, 1, 1, 25, 1)
+    assert job.is_runnable(dt) is True
+    dt = datetime(2000, 1, 1, 0, 26, 1)
+    assert job.is_runnable(dt) is False
+
+
 def test_set_action():
     job = CronJob()
     job.set_action('stub.echo_hello')
