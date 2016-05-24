@@ -5,6 +5,7 @@ from __future__ import (
 import types
 import pytest
 from datetime import datetime
+from crontab import CronTab
 from errcron.cronjob import CronJob, load_from_string
 import stub
 
@@ -40,6 +41,13 @@ def test_set_triggers():
     ):
         with pytest.raises(ValueError):
             job.set_triggers(*keys)
+
+
+def test_crontab():
+    job = CronJob()
+    job.set_crontab('25 * * * *')
+    assert isinstance(job.crontab, CronTab)
+    assert job.crontab.test(datetime(2001, 1, 1, 0, 25)) is True
 
 
 def test_set_action():

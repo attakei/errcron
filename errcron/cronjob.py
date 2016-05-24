@@ -6,6 +6,7 @@ from __future__ import (
 """
 import importlib
 import six
+from crontab import CronTab
 
 
 class CronJob(object):
@@ -18,6 +19,7 @@ class CronJob(object):
         """datetime value by trigger to run job"""
         self.action = None
         """Job action"""
+        self.crontab = None
 
     def __repr__(self):
         if self.trigger_format is None or self.trigger_time is None:
@@ -46,6 +48,9 @@ class CronJob(object):
             raise ValueError
         self.trigger_format = trigger_format
         self.trigger_time = trigger_time
+
+    def set_crontab(self, crontab):
+        self.crontab = CronTab(crontab)
 
     def is_runnable(self, time):
         """Check whether job run action at specified time
