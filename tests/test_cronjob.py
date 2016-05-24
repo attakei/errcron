@@ -16,6 +16,9 @@ def test_for_display():
     assert str(job) == 'CronJob(trigger=[%H->01])'
     job = CronJob()
     assert str(job) == 'CronJob(trigger=[])'
+    job = CronJob()
+    job.set_crontab('25 * * * *')
+    assert str(job) == 'CronJob(crontab=[25 * * * *])'
 
 
 def test_not_run_in_target_time():
@@ -46,8 +49,8 @@ def test_set_triggers():
 def test_crontab():
     job = CronJob()
     job.set_crontab('25 * * * *')
-    assert isinstance(job.crontab, CronTab)
-    assert job.crontab.test(datetime(2001, 1, 1, 0, 25)) is True
+    assert isinstance(job._crontab, CronTab)
+    assert job._crontab.test(datetime(2001, 1, 1, 0, 25)) is True
 
 
 def test_set_action():

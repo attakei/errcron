@@ -19,18 +19,22 @@ class CronJob(object):
         """datetime value by trigger to run job"""
         self.action = None
         """Job action"""
+        self._crontab = None
         self.crontab = None
 
     def __repr__(self):
-        if self.trigger_format is None or self.trigger_time is None:
-            trigger_str = ''
+        elements = []
+        if self.crontab is not None:
+            elements.append('crontab=[{}]'.format(self.crontab))
+        elif self.trigger_format is None or self.trigger_time is None:
+            elements.append('trigger=[]')
         else:
-            trigger_str = '{}->{}'.format(
+            elements.append('trigger=[{}->{}]'.format(
                 self.trigger_format,
                 self.trigger_time,
-            )
-        return 'CronJob(trigger=[{}])'.format(
-            trigger_str,
+            ))
+        return 'CronJob({})'.format(
+            ' '.join(elements),
         )
 
     def set_triggers(self, trigger_format, trigger_time):
@@ -50,7 +54,8 @@ class CronJob(object):
         self.trigger_time = trigger_time
 
     def set_crontab(self, crontab):
-        self.crontab = CronTab(crontab)
+        self.crontab = crontab
+        self._crontab = CronTab(self.crontab)
 
     def is_runnable(self, time):
         """Check whether job run action at specified time
