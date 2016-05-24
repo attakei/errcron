@@ -15,10 +15,10 @@ package_requires = [
     'crontab',
 ]
 test_requires = [
-    'pytest',
     'pytest-pep8',
     'pytest-flakes',
     'pytest-cov',
+    'pytest',
     'freezegun',
 ]
 
