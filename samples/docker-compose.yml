@@ -1,0 +1,6 @@
+py27:
+    build: .
+    dockerfile: py27/Dockerfile
+py27dev:
+    build: .
+    dockerfile: py27dev/Dockerfile
