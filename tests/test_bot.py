@@ -2,12 +2,15 @@
 from __future__ import (
     division, print_function, absolute_import, unicode_literals
 )
+import logging
 from freezegun import freeze_time
 from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
 
 
 class MockedImpl(CrontabMixin):
+    log = logging.Logger(__file__)
+
     def start_poller(self, interval, func):
         pass
 
