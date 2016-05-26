@@ -1,6 +1,9 @@
-py27:
+local:
     build: .
+
+py27:
+    build: samples
     dockerfile: py27/Dockerfile
 py27dev:
-    build: .
+    build: samples
     dockerfile: py27dev/Dockerfile

@@ -82,7 +82,7 @@ BOT_DATA_DIR = '/var/lib/err'
 # locally before publishing it. Note that you can specify only a single
 # directory, however you are free to create subdirectories with multiple
 # plugins inside this directory.
-BOT_EXTRA_PLUGIN_DIR = None
+BOT_EXTRA_PLUGIN_DIR = './'
 
 # If you use an external backend as a plugin,
 # this is where you tell err where to find it.
@@ -114,7 +114,7 @@ BOT_LOG_FILE = BOT_DATA_DIR + '/err.log'
 # If you encounter any issues with Err, please set your log level to
 # logging.DEBUG and attach a log with your bug report to aid the developers
 # in debugging the issue.
-BOT_LOG_LEVEL = logging.INFO
+BOT_LOG_LEVEL = logging.DEBUG
 
 # Enable logging to sentry (find out more about sentry at www.getsentry.com).
 # This is optional and disabled by default.
