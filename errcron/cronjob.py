@@ -97,19 +97,26 @@ class CronJob(object):
         return self.action(plugin, do_time)
 
 
-def load_from_string(crontab):
+def load_from_string(crontab, format='crontab'):
     """Load cronjob from single string
 
     :param crontab: crontab string(trigger_format, trigger_time, function, args)
     :type crontab: str
+    :param format: job trigger type
+    :type format: str
     :return: Cronjob
     :rtype: errcron.cronjob.CronJob
     """
     args = crontab.split()
     job = CronJob()
-    trigger_format = args.pop(0)
-    trigger_time = args.pop(0)
-    job.set_triggers(trigger_format, trigger_time)
+    if format == 'crontab':
+        crontab_ = args[0:5]
+        args = args[5:]
+        job.set_crontab(' '.join(crontab_))
+    elif format == 'datetime':
+        trigger_format = args.pop(0)
+        trigger_time = args.pop(0)
+        job.set_triggers(trigger_format, trigger_time)
     action = args.pop(0)
     job.set_action(action, *args)
     return job

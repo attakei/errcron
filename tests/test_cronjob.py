@@ -98,7 +98,7 @@ def test_do_action_with_arg():
 
 def test_cronjob_fromstring():
     def _ok():
-        job = load_from_string('%H 01 stub.echo_datetime')
+        job = load_from_string('%H 01 stub.echo_datetime', format='datetime')
         assert isinstance(job, CronJob) is True
         assert job.trigger_format == '%H'
         assert job.trigger_time == '01'
@@ -110,3 +110,12 @@ def test_cronjob_fromstring():
 
     _ok()
     _ng_not_str()
+
+
+def test_cronjob_fromstring_for_crontab():
+    def _ok():
+        job = load_from_string('1 * * * * stub.echo_datetime', format='crontab')
+        assert isinstance(job, CronJob) is True
+        assert job.action == stub.echo_datetime
+
+    _ok()

@@ -41,8 +41,8 @@ def test_polled_once(capsys):
 def test_activate_from_crontab_strings(capsys):
     class ActivateImpl(MockedImpl):
         CRONTAB = [
-            '%H 00 stub.print_datetime_with_str sample',
-            '%H 01 stub.print_datetime_with_str sample',
+            '0 0 * * * stub.print_datetime_with_str sample',
+            '0 1 * * * stub.print_datetime_with_str sample',
         ]
 
         def activate(self):
@@ -59,7 +59,7 @@ def test_activate_from_crontab_strings(capsys):
 def test_default_poller_interval_is_30_seconds(capsys):
     class ActivateImpl(MockedImpl):
         CRONTAB = [
-            '%H 00 stub.print_datetime',
+            '0 0 * * * stub.print_datetime',
         ]
 
         def activate(self):
