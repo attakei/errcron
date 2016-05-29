@@ -61,6 +61,7 @@ def test_runnig_in_target_time_with_crontab():
     dt = datetime(2000, 1, 1, 0, 26, 1)
     assert job.is_runnable(dt) is False
 
+
 def test_crontab_hourly():
     job = CronJob()
     job.set_crontab('@hourly')
