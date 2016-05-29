@@ -2,7 +2,7 @@ FROM python:2.7
 
 WORKDIR /usr/src/app
 
-RUN pip install errbot
+RUN pip install errbot crontab
 RUN mkdir /var/lib/err
 
 ADD samples/config.py ./
