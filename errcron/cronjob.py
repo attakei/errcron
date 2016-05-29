@@ -5,6 +5,7 @@ from __future__ import (
 """cron job structure
 """
 import importlib
+import types
 import six
 from crontab import CronTab
 
@@ -77,10 +78,13 @@ class CronJob(object):
         :param args: function arguments
         :type args: list or tuple
         """
-        action_module = '.'.join(action.split('.')[:-1])
-        action_module = importlib.import_module(action_module)
-        action = action.split('.')[-1]
-        self.action = getattr(action_module, action)
+        if not isinstance(action, types.FunctionType):
+            self.action = action
+        else:
+            action_module = '.'.join(action.split('.')[:-1])
+            action_module = importlib.import_module(action_module)
+            action = action.split('.')[-1]
+            self.action = getattr(action_module, action)
         self.action_args = args
 
     def do_action(self, plugin, do_time):
@@ -133,8 +137,8 @@ def parse_crontab(crontab):
     # Parse time
     if crontab.startswith('%'):
         args['_timer'] = 'datetime'
-        args['time_format'] = splited.pop(0)
-        args['time_trigger'] = splited.pop(0)
+        args['trigger_format'] = splited.pop(0)
+        args['trigger_time'] = splited.pop(0)
     elif crontab.startswith('@'):
         args['_timer'] = 'crontab'
         args['crontab'] = splited.pop(0)
@@ -143,5 +147,5 @@ def parse_crontab(crontab):
         args['crontab'] = ' '.join(splited[0:5])
         splited = splited[5:]
     args['action'] = splited.pop(0)
-    args['args'] = tuple(splited)
+    args['args'] = splited
     return args

@@ -134,8 +134,8 @@ def test_cronjob_fromstring_for_crontab_at():
 def test_parse_crontab():
     parsed = parse_crontab('%H 01 stub.echo_datetime')
     assert parsed['_timer'] == 'datetime'
-    assert 'time_trigger' in parsed
-    assert 'time_format' in parsed
+    assert 'trigger_format' in parsed
+    assert 'trigger_time' in parsed
     parsed = parse_crontab('* * * * * stub.echo_datetime')
     assert parsed['_timer'] == 'crontab'
     assert parsed['crontab'] == '* * * * *'
@@ -143,4 +143,4 @@ def test_parse_crontab():
     assert parsed['_timer'] == 'crontab'
     assert parsed['crontab'] == '@hourly'
     assert parsed['action'] == 'stub.echo_datetime'
-    assert parsed['args'] == ()
+    assert parsed['args'] == []

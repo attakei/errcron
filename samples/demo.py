@@ -1,10 +1,15 @@
 from errbot import BotPlugin, botcmd, arg_botcmd, webhook
 from errcron.bot import CrontabMixin
 
+
 class Demo(BotPlugin, CrontabMixin):
     """
     demo
     """
+    CRONTAB = [
+        '@hourly .post_hourly @attakei',
+    ]
+
 
     def activate(self):
         """
@@ -95,3 +100,7 @@ class Demo(BotPlugin, CrontabMixin):
                 name=args.name,
                 number=args.favorite_number,
             )
+
+    def post_hourly(self, polled_time, identity):
+        user =  self.build_identifier(identity)
+        return self.send(user, 'Just {} o-clock!!'.format(polled_time.strftime('%H')))
