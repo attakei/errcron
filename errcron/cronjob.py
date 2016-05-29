@@ -110,9 +110,14 @@ def load_from_string(crontab, format='crontab'):
     args = crontab.split()
     job = CronJob()
     if format == 'crontab':
-        crontab_ = args[0:5]
-        args = args[5:]
-        job.set_crontab(' '.join(crontab_))
+        if args[0].startswith('@'):
+            crontab_ = args[0]
+            args = args[1:]
+            job.set_crontab(crontab_)
+        else:
+            crontab_ = args[0:5]
+            args = args[5:]
+            job.set_crontab(' '.join(crontab_))
     elif format == 'datetime':
         trigger_format = args.pop(0)
         trigger_time = args.pop(0)

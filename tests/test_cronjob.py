@@ -120,3 +120,12 @@ def test_cronjob_fromstring_for_crontab():
         assert job.action == stub.echo_datetime
 
     _ok()
+
+
+def test_cronjob_fromstring_for_crontab_at():
+    def _ok():
+        job = load_from_string('@hourly stub.echo_datetime', format='crontab')
+        assert isinstance(job, CronJob) is True
+        assert job.action == stub.echo_datetime
+
+    _ok()

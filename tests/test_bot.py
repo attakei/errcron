@@ -56,6 +56,23 @@ def test_activate_from_crontab_strings(capsys):
         assert out == 'sample2016-01-01'
 
 
+def test_activate_from_crontab_strings_2(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '@hourly stub.print_datetime_with_str sample',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == 'sample2016-01-01'
+
+
 def test_default_poller_interval_is_30_seconds(capsys):
     class ActivateImpl(MockedImpl):
         CRONTAB = [
