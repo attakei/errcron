@@ -12,12 +12,13 @@ here = os.path.abspath(os.path.dirname(__file__))
 package_requires = [
     # 'errbot',
     'six',
+    'crontab',
 ]
 test_requires = [
-    'pytest',
     'pytest-pep8',
     'pytest-flakes',
     'pytest-cov',
+    'pytest',
     'freezegun',
 ]
 

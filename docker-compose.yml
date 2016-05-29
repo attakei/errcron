@@ -1,0 +1,21 @@
+local:
+    build: .
+
+py27:
+    build: samples
+    dockerfile: py27/Dockerfile
+py27dev:
+    build: samples
+    dockerfile: py27dev/Dockerfile
+py34:
+    build: samples
+    dockerfile: py34/Dockerfile
+py34dev:
+    build: samples
+    dockerfile: py34dev/Dockerfile
+py35:
+    build: samples
+    dockerfile: py35/Dockerfile
+py35dev:
+    build: samples
+    dockerfile: py35dev/Dockerfile

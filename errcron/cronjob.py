@@ -6,6 +6,7 @@ from __future__ import (
 """
 import importlib
 import six
+from crontab import CronTab
 
 
 class CronJob(object):
@@ -18,17 +19,22 @@ class CronJob(object):
         """datetime value by trigger to run job"""
         self.action = None
         """Job action"""
+        self._crontab = None
+        self.crontab = None
 
     def __repr__(self):
-        if self.trigger_format is None or self.trigger_time is None:
-            trigger_str = ''
+        elements = []
+        if self.crontab is not None:
+            elements.append('crontab=[{}]'.format(self.crontab))
+        elif self.trigger_format is None or self.trigger_time is None:
+            elements.append('trigger=[]')
         else:
-            trigger_str = '{}->{}'.format(
+            elements.append('trigger=[{}->{}]'.format(
                 self.trigger_format,
                 self.trigger_time,
-            )
-        return 'CronJob(trigger=[{}])'.format(
-            trigger_str,
+            ))
+        return 'CronJob({})'.format(
+            ' '.join(elements),
         )
 
     def set_triggers(self, trigger_format, trigger_time):
@@ -47,6 +53,10 @@ class CronJob(object):
         self.trigger_format = trigger_format
         self.trigger_time = trigger_time
 
+    def set_crontab(self, crontab):
+        self.crontab = crontab
+        self._crontab = CronTab(self.crontab)
+
     def is_runnable(self, time):
         """Check whether job run action at specified time
 
@@ -55,6 +65,8 @@ class CronJob(object):
         :return: Job is runnable or not
         :rtype: boolean
         """
+        if self._crontab is not None:
+            return self._crontab.test(time)
         return time.strftime(self.trigger_format) == self.trigger_time
 
     def set_action(self, action, *args):
@@ -85,19 +97,31 @@ class CronJob(object):
         return self.action(plugin, do_time)
 
 
-def load_from_string(crontab):
+def load_from_string(crontab, format='crontab'):
     """Load cronjob from single string
 
     :param crontab: crontab string(trigger_format, trigger_time, function, args)
     :type crontab: str
+    :param format: job trigger type
+    :type format: str
     :return: Cronjob
     :rtype: errcron.cronjob.CronJob
     """
     args = crontab.split()
     job = CronJob()
-    trigger_format = args.pop(0)
-    trigger_time = args.pop(0)
-    job.set_triggers(trigger_format, trigger_time)
+    if format == 'crontab':
+        if args[0].startswith('@'):
+            crontab_ = args[0]
+            args = args[1:]
+            job.set_crontab(crontab_)
+        else:
+            crontab_ = args[0:5]
+            args = args[5:]
+            job.set_crontab(' '.join(crontab_))
+    elif format == 'datetime':
+        trigger_format = args.pop(0)
+        trigger_time = args.pop(0)
+        job.set_triggers(trigger_format, trigger_time)
     action = args.pop(0)
     job.set_action(action, *args)
     return job
