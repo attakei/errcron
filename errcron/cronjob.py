@@ -125,3 +125,23 @@ def load_from_string(crontab, format='crontab'):
     action = args.pop(0)
     job.set_action(action, *args)
     return job
+
+
+def parse_crontab(crontab):
+    args = {}
+    splited = crontab.split()
+    # Parse time
+    if crontab.startswith('%'):
+        args['_timer'] = 'datetime'
+        args['time_format'] = splited.pop(0)
+        args['time_trigger'] = splited.pop(0)
+    elif crontab.startswith('@'):
+        args['_timer'] = 'crontab'
+        args['crontab'] = splited.pop(0)
+    else:
+        args['_timer'] = 'crontab'
+        args['crontab'] = ' '.join(splited[0:5])
+        splited = splited[5:]
+    args['action'] = splited.pop(0)
+    args['args'] = tuple(splited)
+    return args
