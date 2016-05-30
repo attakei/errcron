@@ -3,6 +3,7 @@ from __future__ import (
     division, print_function, absolute_import, unicode_literals
 )
 import logging
+import six
 from freezegun import freeze_time
 from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
@@ -92,3 +93,24 @@ def test_default_poller_interval_is_30_seconds(capsys):
         plugin.poll_crontab()
         out, err = capsys.readouterr()
         assert out == ''
+
+
+def test_activate_instance_method(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '0 0 * * * .print_datetime',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+
+        def print_datetime(self, polled_time):
+            six.print_(polled_time.strftime('%Y-%m-%d'), end='')
+
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == '2016-01-01'
