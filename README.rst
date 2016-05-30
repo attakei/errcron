@@ -1,11 +1,15 @@
 Crontab implementation for Errbot
 =================================
 
+It is extention for plugin of Errbot to implement poller llike crontab.
+
 Requirements
 ------------
 
 * Python 2.7,3.4 or 3.5
-* Errbot
+* `six <https://pypi.python.org/pypi/six>`_
+* `crontab <https://pypi.python.org/pypi/crontab>`_
+* `(Errbot) <https://pypi.python.org/pypi/Errbot>`_
 
 
 Installation
@@ -21,25 +25,44 @@ Installation
 Usage
 -----
 
-1. Extend your plugin by CrontabMixin and activate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Example
+^^^^^^^
 
 .. code-block:: python
 
-   class Crontab(BotPlugin, CrontabMixin):
+   class ClockTimer(BotPlugin, CrontabMixin):
        CRONTAB = [
-           '%H 12 errcron.action.post_message #general LunchTime!',
+           '@hourly .post_hourly',
+           '0 8 * * * .post_morning_call @attakei'
        ]
 
        def activate(self):
            super(Crontab, self).activate()
            self.activate_crontab()
 
-2. Define your crontab
-^^^^^^^^^^^^^^^^^^^^^^
+       def post_hourly(self, polled_time):
+           user =  self.build_identifier('#general')
+           return self.send(user, 'Just {} o-clock!!'.format(polled_time.strftime('%H')))
 
-3. Run
-^^^^^^
+       def post_morning_call(self, polled_time, identity):
+           user =  self.build_identifier(identity)
+           return self.send(user, 'Good morning!')
+
+#. Extend your plugin by CrontabMixin
+#. Define crontab
+#. In activate, activate crontab too
+#. Run
+
+
+Changes
+-------
+
+version 0.3
+^^^^^^^^^^^
+
+* Implement crontab format.
+* Implement be able to run instance method of plugin.
+* Change plling interval
 
 
 License
