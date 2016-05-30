@@ -3,6 +3,7 @@ from __future__ import (
     division, print_function, absolute_import, unicode_literals
 )
 import logging
+import six
 from freezegun import freeze_time
 from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
@@ -41,8 +42,25 @@ def test_polled_once(capsys):
 def test_activate_from_crontab_strings(capsys):
     class ActivateImpl(MockedImpl):
         CRONTAB = [
-            '%H 00 stub.print_datetime_with_str sample',
-            '%H 01 stub.print_datetime_with_str sample',
+            '0 0 * * * stub.print_datetime_with_str sample',
+            '0 1 * * * stub.print_datetime_with_str sample',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == 'sample2016-01-01'
+
+
+def test_activate_from_crontab_strings_2(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '@hourly stub.print_datetime_with_str sample',
         ]
 
         def activate(self):
@@ -59,7 +77,7 @@ def test_activate_from_crontab_strings(capsys):
 def test_default_poller_interval_is_30_seconds(capsys):
     class ActivateImpl(MockedImpl):
         CRONTAB = [
-            '%H 00 stub.print_datetime',
+            '0 0 * * * stub.print_datetime',
         ]
 
         def activate(self):
@@ -75,3 +93,23 @@ def test_default_poller_interval_is_30_seconds(capsys):
         plugin.poll_crontab()
         out, err = capsys.readouterr()
         assert out == ''
+
+
+def test_activate_instance_method(capsys):
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '0 0 * * * .print_datetime',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+
+        def print_datetime(self, polled_time):
+            six.print_(polled_time.strftime('%Y-%m-%d'), end='')
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out == '2016-01-01'

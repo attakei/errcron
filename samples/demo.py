@@ -1,10 +1,15 @@
 from errbot import BotPlugin, botcmd, arg_botcmd, webhook
 from errcron.bot import CrontabMixin
 
+
 class Demo(BotPlugin, CrontabMixin):
     """
     demo
     """
+    CRONTAB = [
+        '* * * * * .notify_minute @attakei',
+    ]
+
 
     def activate(self):
         """
@@ -95,3 +100,7 @@ class Demo(BotPlugin, CrontabMixin):
                 name=args.name,
                 number=args.favorite_number,
             )
+
+    def notify_minute(self, polled_time, identity):
+        user =  self.build_identifier(identity)
+        return self.send(user, 'Currently {}'.format(polled_time.strftime('%H:%M')))
