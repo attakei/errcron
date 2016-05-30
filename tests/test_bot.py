@@ -107,7 +107,6 @@ def test_activate_instance_method(capsys):
         def print_datetime(self, polled_time):
             six.print_(polled_time.strftime('%Y-%m-%d'), end='')
 
-
     plugin = ActivateImpl()
     plugin.activate()
     with freeze_time('2016-01-01 00:00:01'):
