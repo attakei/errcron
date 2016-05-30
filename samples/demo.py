@@ -7,7 +7,7 @@ class Demo(BotPlugin, CrontabMixin):
     demo
     """
     CRONTAB = [
-        '@hourly .post_hourly @attakei',
+        '* * * * * .notify_minute @attakei',
     ]
 
 
@@ -101,6 +101,6 @@ class Demo(BotPlugin, CrontabMixin):
                 number=args.favorite_number,
             )
 
-    def post_hourly(self, polled_time, identity):
+    def notify_minute(self, polled_time, identity):
         user =  self.build_identifier(identity)
-        return self.send(user, 'Just {} o-clock!!'.format(polled_time.strftime('%H')))
+        return self.send(user, 'Currently {}'.format(polled_time.strftime('%H:%M')))
