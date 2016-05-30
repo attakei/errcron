@@ -78,7 +78,7 @@ class CronJob(object):
         :param args: function arguments
         :type args: list or tuple
         """
-        if not isinstance(action, types.FunctionType):
+        if isinstance(action, (types.FunctionType, types.MethodType)):
             self.action = action
         else:
             action_module = '.'.join(action.split('.')[:-1])
