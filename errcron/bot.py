@@ -2,7 +2,6 @@
 """Bot class extensions
 """
 import datetime
-import types
 from errcron import cronjob
 
 
