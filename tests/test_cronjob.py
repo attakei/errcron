@@ -6,7 +6,7 @@ import types
 import pytest
 from datetime import datetime
 from crontab import CronTab
-from errcron.cronjob import CronJob, load_from_string
+from errcron.cronjob import CronJob, load_from_string, parse_crontab
 import stub
 
 
@@ -129,3 +129,18 @@ def test_cronjob_fromstring_for_crontab_at():
         assert job.action == stub.echo_datetime
 
     _ok()
+
+
+def test_parse_crontab():
+    parsed = parse_crontab('%H 01 stub.echo_datetime')
+    assert parsed['_timer'] == 'datetime'
+    assert 'trigger_format' in parsed
+    assert 'trigger_time' in parsed
+    parsed = parse_crontab('* * * * * stub.echo_datetime')
+    assert parsed['_timer'] == 'crontab'
+    assert parsed['crontab'] == '* * * * *'
+    parsed = parse_crontab('@hourly stub.echo_datetime')
+    assert parsed['_timer'] == 'crontab'
+    assert parsed['crontab'] == '@hourly'
+    assert parsed['action'] == 'stub.echo_datetime'
+    assert parsed['args'] == []

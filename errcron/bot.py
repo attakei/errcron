@@ -16,7 +16,18 @@ class CrontabMixin(object):
         self._crontab = []
         if hasattr(self, 'CRONTAB'):
             for crontab_spec in self.CRONTAB:
-                job = cronjob.load_from_string(crontab_spec)
+                args = cronjob.parse_crontab(crontab_spec)
+                job = cronjob.CronJob()
+                if args['_timer'] == 'datetime':
+                    job.set_triggers(args['trigger_format'], args['trigger_time'])
+                if args['_timer'] == 'crontab':
+                    job.set_crontab(args['crontab'])
+                if args['action'].startswith('.'):
+                    action_name = args['action'][1:]
+                    action_ = getattr(self.__class__, action_name)
+                else:
+                    action_ = args['action']
+                job.set_action(action_, *args['args'])
                 self._crontab.append(job)
         self.start_poller(30, self.poll_crontab)
 
@@ -31,3 +42,6 @@ class CrontabMixin(object):
             if not job.is_runnable(polled_time):
                 continue
             job.do_action(self, polled_time)
+
+    def load_job_from_string(self, spec):
+        pass
