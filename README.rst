@@ -8,7 +8,7 @@ Requirements
 
 * Python 2.7,3.4 or 3.5
 * `six <https://pypi.python.org/pypi/six>`_
-* `crontab <https://pypi.python.org/pypi/crontab>`_
+* `crontab <https://pypi.python.org/pypi/python-crontab>`_
 * `(Errbot) <https://pypi.python.org/pypi/Errbot>`_
 
 
