@@ -24,7 +24,7 @@ Contents:
    introduction
    installation
    usage
-   changes/index
+   changes
 
 
 Indices and tables
