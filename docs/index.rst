@@ -6,6 +6,9 @@
 Welcome to Errcron's documentation!
 ===================================
 
+.. image:: https://img.shields.io/pypi/v/nine.svg
+   :target: https://pypi.python.org/pypi/errcron
+
 .. image:: https://travis-ci.org/attakei/errcron.svg?branch=master
    :target: https://travis-ci.org/attakei/errcron
 
