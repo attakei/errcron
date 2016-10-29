@@ -14,13 +14,6 @@ package_requires = [
     'six',
     'crontab',
 ]
-test_requires = [
-    'pytest-pep8',
-    'pytest-flakes',
-    'pytest-cov',
-    'pytest',
-    'freezegun',
-]
 
 
 def read_file(path):
@@ -64,6 +57,11 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
+def fetch_test_requires():
+    reqs = read_file(os.path.join(here, 'tests/requirements.txt'))
+    return reqs.strip().split()
+
+
 setup(
     name='errcron',
     version=find_version('errcron/__init__.py'),
@@ -84,8 +82,8 @@ setup(
     keywords='errbot plugin crontab',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     install_requires=package_requires,
-    tests_require=test_requires,
-    extras_require={'test': test_requires},
+    tests_require=fetch_test_requires(),
+    extras_require={'test': fetch_test_requires()},
     cmdclass={
         'test': PyTest,
     },
