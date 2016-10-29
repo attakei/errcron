@@ -23,6 +23,7 @@ Contents:
 
    introduction
    installation
+   usage
 
 Indices and tables
 ==================
