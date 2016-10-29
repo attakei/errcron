@@ -16,7 +16,8 @@ Welcome to Errcron's documentation!
    :target: https://coveralls.io/github/attakei/errcron?branch=master
 
 
-Contents:
+Contents
+--------
 
 .. toctree::
    :maxdepth: 2
@@ -25,6 +26,15 @@ Contents:
    installation
    usage
    changes
+
+
+API documentation
+-----------------
+
+.. toctree::
+   :maxdepth: 3
+
+   errcron
 
 
 Indices and tables
