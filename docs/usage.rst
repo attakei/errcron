@@ -52,3 +52,5 @@ To use, set timezone string for ``TIMEZONE`` property in plugin class.
 
    class Crontab(BotPlugin, CrontabMixin):
        TIMEZONE = 'America/New_York'
+
+You can set timezone ``config.py`` instead of plugin class.

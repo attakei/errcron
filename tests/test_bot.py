@@ -116,7 +116,7 @@ def test_activate_instance_method(capsys):
         assert out == '2016-01-01'
 
 
-def test_timezone_specs(capsys):
+def test_timezone_in_plugin(capsys):
     class ActivateImpl(MockedImpl):
         TIMEZONE = 'Asia/Tokyo'
         CRONTAB = [
@@ -131,6 +131,30 @@ def test_timezone_specs(capsys):
 
     plugin = ActivateImpl()
     plugin.activate()
+    with freeze_time('2016-01-01 00:00:01'):
+        plugin.poll_crontab()
+        out, err = capsys.readouterr()
+        assert out != '2016-01-01'
+
+
+def test_timezone_in_config(capsys):
+    class MockConfig(object):
+        TIMEZONE = 'Asia/Tokyo'
+
+    class ActivateImpl(MockedImpl):
+        CRONTAB = [
+            '0 0 * * * .print_datetime',
+        ]
+
+        def activate(self):
+            self.activate_crontab()
+
+        def print_datetime(self, polled_time):
+            six.print_(polled_time.strftime('%Y-%m-%d'), end='')
+
+    plugin = ActivateImpl()
+    plugin.activate()
+    setattr(plugin, 'bot_config', MockConfig())
     with freeze_time('2016-01-01 00:00:01'):
         plugin.poll_crontab()
         out, err = capsys.readouterr()

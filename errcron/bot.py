@@ -11,6 +11,20 @@ class CrontabMixin(object):
 
     If you will use crontab by it, call activate_crontab
     """
+    def _get_current_time(self):
+        if hasattr(self, 'TIMEZONE'):
+            # Plugin class has TIMEZONE
+            timezone = pytz.timezone(self.TIMEZONE)
+            polled_time = datetime.datetime.now(timezone)
+        elif hasattr(getattr(self, 'bot_config', None), 'TIMEZONE'):
+            # Errbot config has TIMEZONE
+            timezone = pytz.timezone(self.bot_config.TIMEZONE)
+            polled_time = datetime.datetime.now(timezone)
+        else:
+            # Use machine timezone
+            polled_time = datetime.datetime.now()
+        return polled_time
+
     def activate_crontab(self):
         """Activate polling function and register first crontab
         """
@@ -35,11 +49,7 @@ class CrontabMixin(object):
     def poll_crontab(self):
         """Check crontab and run target jobs
         """
-        if hasattr(self, 'TIMEZONE'):
-            timezone = pytz.timezone(self.TIMEZONE)
-            polled_time = datetime.datetime.now(timezone)
-        else:
-            polled_time = datetime.datetime.now()
+        polled_time = self._get_current_time()
         if polled_time.second >= 30:
             self.log.debug('Skip cronjobs in {}'.format(polled_time))
             return
