@@ -9,12 +9,6 @@ from setuptools.command.test import test as TestCommand
 
 
 here = os.path.abspath(os.path.dirname(__file__))
-package_requires = [
-    # 'errbot',
-    'six',
-    'crontab',
-    'pytz',
-]
 
 
 def read_file(path):
@@ -58,8 +52,8 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
-def fetch_test_requires():
-    reqs = read_file(os.path.join(here, 'tests/requirements.txt'))
+def find_requires(requirements):
+    reqs = read_file(os.path.join(here, requirements))
     return reqs.strip().split()
 
 
@@ -82,9 +76,9 @@ setup(
     ],
     keywords='errbot plugin crontab',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
-    install_requires=package_requires,
-    tests_require=fetch_test_requires(),
-    extras_require={'test': fetch_test_requires()},
+    install_requires=find_requires('requirements.txt'),
+    tests_require=find_requires('tests/requirements.txt'),
+    extras_require={'test': find_requires('tests/requirements.txt')},
     cmdclass={
         'test': PyTest,
     },

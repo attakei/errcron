@@ -6,12 +6,10 @@ python:
 
 # Run CI
 install:
-  - pip install -e .
-  - pip install -r tests/requirements.txt
-  - pip install coveralls
+  - pip install tox
 script:
-  - coverage run --source=errcron -m py.test tests
-after_success: coveralls
+  - tox
+
 
 # Integrations
 notifications:

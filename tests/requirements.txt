@@ -3,3 +3,4 @@ pytest-flakes
 pytest-cov
 pytest
 freezegun
+codeclimate-test-reporter
