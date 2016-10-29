@@ -1,12 +1,17 @@
 sudo: false
 language: python
-python: '3.5'
-env:
-  - TOXENV=py34
-  - TOXENV=py35
+python:
+  - '3.4'
+  - '3.5'
 
-install: pip install tox
-script: tox
+# Run CI
+install:
+  - pip install -e .
+  - pip install -r tests/requirements.txt
+  - pip install coveralls
+script:
+  - coverage run --source=errcron -m py.test tests
+after_success: coveralls
 
 # Integrations
 notifications:
@@ -15,4 +20,4 @@ notifications:
       secure: B1T7oIydiT99pyt+slAZ9B54huRoMrAMmw0S780YjII7P9nB26RrGUIRpcZQBtxf396voTAq/bl5SKCE1FYtczepjMMb83tGwUf1xEp1pDfeeYi/M2FIlWkkzN26cXxNGykKu2OYcLWhlfeLrBdP7ALpruDj2sAn62tPv7cx10RAPc79QqF1AI9kFflnFlg685czfRpYG6CkpAz3iaKbylh7x/Z9iLjSKRYtl37iH7P+ficQkiVOjFXH/Oa/amO8/zlZTac+hus8FzhgdSYlhoIBjaZrAGCZ+G2PaqR+98sIHYkPoXD7Yc+zX5QXnTE7GzmtmZwuegwMn0+ycFlmM+CFYmCJpK2olsppthKhAuxQYlBpDkB0+UHy8jf4UR7N2SouBxo9UdLSVwR6EE/utovMMXyoAO+ia/eDBcsXcF3GcXULu0eLbpdtY1nyivwbI6k3hck4Eh5R7o3CbK1MvmuQwJ2V8xvMfxByHiRrEIfV6A54/zv6CkI/WpZJ45V88DqIIQvKo6meJaXT0alreiH8HGvAlqHQXY8lHgGyLVqHpSXs6/ZM3lANsj3PXTxa6NVdjY2rhRxxuWuLfSB0QGAlRKm2gmDbxmWs63S7+mY41u+0UQFWkVWFa5Ny4Mj0c5pNZq5kvXg9RcDrq26rB5rGcnpnUP++RYri6cpfZQU=
     on_success: change
     on_failure: always
-    on_start: never
+#     on_start: never
