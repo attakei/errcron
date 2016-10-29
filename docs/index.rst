@@ -12,8 +12,13 @@ Welcome to Errcron's documentation!
 .. image:: https://travis-ci.org/attakei/errcron.svg?branch=master
    :target: https://travis-ci.org/attakei/errcron
 
-.. image:: https://coveralls.io/repos/github/attakei/errcron/badge.svg?branch=master
-   :target: https://coveralls.io/github/attakei/errcron?branch=master
+.. image:: https://codeclimate.com/github/attakei/errcron/badges/gpa.svg
+   :target: https://codeclimate.com/github/attakei/errcron
+   :alt: Code Climate
+
+.. image:: https://codeclimate.com/github/attakei/errcron/badges/coverage.svg
+   :target: https://codeclimate.com/github/attakei/errcron/coverage
+   :alt: Test Coverage
 
 
 Contents
