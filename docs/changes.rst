@@ -1,5 +1,5 @@
-Change log
-==========
+Change logs
+===========
 
 Current version
 ---------------

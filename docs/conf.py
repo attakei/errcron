@@ -19,6 +19,7 @@
 #
 import os
 import sys
+import subprocess
 # sys.path.insert(0, os.path.abspath('.'))
 sys.path.append(os.path.abspath('../'))
 
@@ -39,7 +40,6 @@ extensions = [
     # 'sphinx.ext.coverage',
     # 'sphinx.ext.ifconfig',
     # 'sphinx.ext.viewcode',
-    # 'sphinx.ext.githubpages',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -123,6 +123,11 @@ pygments_style = 'sphinx'
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+# -- Apidoc --------------------------------------------------------------------
+
+def run_apidoc(_):
+    subprocess.check_call("sphinx-apidoc -e -f -o . ../errcron", shell=True)
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -349,12 +354,12 @@ texinfo_documents = [
 #
 # texinfo_no_detailmenu = False
 
+# -- Misc options -------------------------------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
 
 
-# Extensions
 def reverse_toctree(app, doctree, docname):
     """Reverse the order of entries in the root toctree if 'glob' is used."""
     if docname == "changes":
@@ -363,5 +368,7 @@ def reverse_toctree(app, doctree, docname):
                 node["entries"].reverse()
                 break
 
+
 def setup(app):
     app.connect("doctree-resolved", reverse_toctree)
+    app.connect("builder-inited", run_apidoc)
