@@ -2,6 +2,7 @@
 """Bot class extensions
 """
 import datetime
+import pytz
 from errcron import cronjob
 
 
@@ -34,7 +35,11 @@ class CrontabMixin(object):
     def poll_crontab(self):
         """Check crontab and run target jobs
         """
-        polled_time = datetime.datetime.now()
+        if hasattr(self, 'TIMEZONE'):
+            timezone = pytz.timezone(self.TIMEZONE)
+            polled_time = datetime.datetime.now(timezone)
+        else:
+            polled_time = datetime.datetime.now()
         if polled_time.second >= 30:
             self.log.debug('Skip cronjobs in {}'.format(polled_time))
             return
