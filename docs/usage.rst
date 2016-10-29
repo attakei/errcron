@@ -37,3 +37,18 @@ errcron use crontab like job scheduliing.
 See `crontab page in PyPI`_
 
 .. _crontab page in PyPI: https://launchpad.net/python-crontab
+
+
+Set timezone
+------------
+
+If scheduling timezone is not same machine timezone,
+you can change timezone settings in plugin.
+
+To use, set timezone string for ``TIMEZONE`` property in plugin class.
+
+
+.. code-block:: python
+
+   class Crontab(BotPlugin, CrontabMixin):
+       TIMEZONE = 'America/New_York'
