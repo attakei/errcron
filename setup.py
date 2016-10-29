@@ -13,6 +13,7 @@ package_requires = [
     # 'errbot',
     'six',
     'crontab',
+    'pytz',
 ]
 
 
