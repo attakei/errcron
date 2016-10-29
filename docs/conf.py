@@ -351,3 +351,16 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None}
+
+
+# Extensions
+def reverse_toctree(app, doctree, docname):
+    """Reverse the order of entries in the root toctree if 'glob' is used."""
+    if docname == "changes":
+        for node in doctree.traverse():
+            if node.tagname == "toctree" and node.get("glob"):
+                node["entries"].reverse()
+                break
+
+def setup(app):
+    app.connect("doctree-resolved", reverse_toctree)
