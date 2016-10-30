@@ -1,8 +1,11 @@
 sudo: false
 language: python
-python:
-  - '3.4'
-  - '3.5'
+python: '3.5'
+env:
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=py35
+
 
 # Run CI
 install:
@@ -10,6 +13,7 @@ install:
 script:
   - tox
 
+# Add ons
 
 # Integrations
 notifications:
