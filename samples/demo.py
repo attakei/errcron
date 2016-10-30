@@ -10,7 +10,6 @@ class Demo(BotPlugin, CrontabMixin):
         '* * * * * .notify_minute @attakei',
     ]
 
-
     def activate(self):
         """
         Triggers on plugin activation
@@ -34,9 +33,10 @@ class Demo(BotPlugin, CrontabMixin):
 
         You should delete it if your plugin doesn't use any configuration like this
         """
-        return {'EXAMPLE_KEY_1': "Example value",
-                'EXAMPLE_KEY_2': ["Example", "Value"]
-               }
+        return {
+            'EXAMPLE_KEY_1': "Example value",
+            'EXAMPLE_KEY_2': ["Example", "Value"]
+        }
 
     def check_configuration(self, configuration):
         """
@@ -102,5 +102,5 @@ class Demo(BotPlugin, CrontabMixin):
             )
 
     def notify_minute(self, polled_time, identity):
-        user =  self.build_identifier(identity)
+        user = self.build_identifier(identity)
         return self.send(user, 'Currently {}'.format(polled_time.strftime('%H:%M')))
