@@ -4,7 +4,6 @@ from __future__ import (
 )
 import logging
 import six
-import pytz
 from freezegun import freeze_time
 from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
