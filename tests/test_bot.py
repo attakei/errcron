@@ -9,7 +9,12 @@ from errcron.bot import CrontabMixin
 from errcron.cronjob import CronJob
 
 
-class MockedImpl(CrontabMixin):
+class BotPluginMock(object):
+    def activate(self):
+        pass
+
+
+class MockedImpl(CrontabMixin, BotPluginMock):
     log = logging.Logger(__file__)
 
     def start_poller(self, interval, func):
