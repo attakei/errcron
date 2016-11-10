@@ -1,2 +1,5 @@
+Version 0.4.0
+=============
+
 * Enable class TIMEZONE definition
 * Set order of extends

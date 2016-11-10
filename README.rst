@@ -6,9 +6,10 @@ It is extention for plugin of Errbot to implement poller llike crontab.
 Requirements
 ------------
 
-* Python 2.7,3.4 or 3.5
+* Python 2.7, 3.4 or 3.5
 * `six <https://pypi.python.org/pypi/six>`_
 * `crontab <https://pypi.python.org/pypi/python-crontab>`_
+* `pytz <https://pypi.python.org/pypi/pytz>`_
 * `(Errbot) <https://pypi.python.org/pypi/Errbot>`_
 
 
@@ -57,12 +58,11 @@ Example
 Changes
 -------
 
-version 0.3
+version 0.4
 ^^^^^^^^^^^
 
-* Implement crontab format.
-* Implement be able to run instance method of plugin.
-* Change plling interval
+* Enable class TIMEZONE definition
+* Set order of extends
 
 
 License
