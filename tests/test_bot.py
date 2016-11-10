@@ -46,9 +46,6 @@ def test_activate_from_crontab_strings(capsys):
             '0 1 * * * stub.print_datetime_with_str sample',
         ]
 
-        def activate(self):
-            self.activate_crontab()
-
     plugin = ActivateImpl()
     plugin.activate()
     with freeze_time('2016-01-01 00:00:01'):
@@ -63,9 +60,6 @@ def test_activate_from_crontab_strings_2(capsys):
             '@hourly stub.print_datetime_with_str sample',
         ]
 
-        def activate(self):
-            self.activate_crontab()
-
     plugin = ActivateImpl()
     plugin.activate()
     with freeze_time('2016-01-01 00:00:01'):
@@ -79,9 +73,6 @@ def test_default_poller_interval_is_30_seconds(capsys):
         CRONTAB = [
             '0 0 * * * stub.print_datetime',
         ]
-
-        def activate(self):
-            self.activate_crontab()
 
     plugin = ActivateImpl()
     plugin.activate()
@@ -100,9 +91,6 @@ def test_activate_instance_method(capsys):
         CRONTAB = [
             '0 0 * * * .print_datetime',
         ]
-
-        def activate(self):
-            self.activate_crontab()
 
         def print_datetime(self, polled_time):
             six.print_(polled_time.strftime('%Y-%m-%d'), end='')
@@ -144,9 +132,6 @@ def test_timezone_in_config(capsys):
         CRONTAB = [
             '0 0 * * * .print_datetime',
         ]
-
-        def activate(self):
-            self.activate_crontab()
 
         def print_datetime(self, polled_time):
             six.print_(polled_time.strftime('%Y-%m-%d'), end='')
