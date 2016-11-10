@@ -30,15 +30,15 @@ Example
 
 .. code-block:: python
 
-   class ClockTimer(BotPlugin, CrontabMixin):
+   class ClockTimer(CrontabMixin, BotPlugin):
        CRONTAB = [
            '@hourly .post_hourly',
            '0 8 * * * .post_morning_call @attakei'
        ]
 
        def activate(self):
-           super(Crontab, self).activate()
-           self.activate_crontab()
+           super().activate()
+           # some expression
 
        def post_hourly(self, polled_time):
            user =  self.build_identifier('#general')

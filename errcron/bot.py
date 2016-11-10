@@ -11,6 +11,10 @@ class CrontabMixin(object):
 
     If you will use crontab by it, call activate_crontab
     """
+    def activate(self):
+        super().activate()
+        self.activate_crontab()
+
     def _get_current_time(self):
         if hasattr(self, 'TIMEZONE'):
             # Plugin class has TIMEZONE
