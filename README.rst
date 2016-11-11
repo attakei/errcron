@@ -58,6 +58,11 @@ Example
 Changes
 -------
 
+version 0.4.1
+^^^^^^^^^^^^^
+
+* Fix missing dependencies
+
 version 0.4
 ^^^^^^^^^^^
 
