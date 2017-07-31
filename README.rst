@@ -3,6 +3,11 @@ Crontab implementation for Errbot
 
 It is extention for plugin of Errbot to implement poller llike crontab.
 
+.. image:: https://requires.io/github/attakei/errcron/requirements.svg?branch=master
+     :target: https://requires.io/github/attakei/errcron/requirements/?branch=master
+     :alt: Requirements Status
+
+
 Requirements
 ------------
 
