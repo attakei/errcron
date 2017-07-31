@@ -21,7 +21,7 @@ Requirements
 Installation
 ------------
 
-.. code-block::
+.. code-block:: bash
 
    $ pip install errcron
    or
