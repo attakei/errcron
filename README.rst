@@ -35,6 +35,7 @@ Example
 ^^^^^^^
 
 .. code-block:: python
+
    from errcron import CrontabMixin
 
 
