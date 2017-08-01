@@ -8,6 +8,7 @@ env:
   - TOXENV=py36
   - TOXENV=codestyle
   - TOXENV=flakes
+  - TOXENV=pypi
 
 
 # Run CI
