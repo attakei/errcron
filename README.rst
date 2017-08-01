@@ -35,6 +35,8 @@ Example
 ^^^^^^^
 
 .. code-block:: python
+   from errcron import CrontabMixin
+
 
    class ClockTimer(CrontabMixin, BotPlugin):
        CRONTAB = [
@@ -62,6 +64,12 @@ Example
 
 Changes
 -------
+
+version 0.4.2
+^^^^^^^^^^^^^
+
+* Add python 3.6 for test target (compatible)
+* Can import as ``from errcron import CrontabMixin``
 
 version 0.4.1
 ^^^^^^^^^^^^^
