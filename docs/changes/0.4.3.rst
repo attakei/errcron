@@ -1,0 +1,5 @@
+version 0.4.3
+=============
+
+* Add python 3.6 for test target (compatible)
+* Can import as ``from errcron import CrontabMixin``

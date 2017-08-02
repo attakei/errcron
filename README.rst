@@ -11,7 +11,7 @@ It is extention for plugin of Errbot to implement poller llike crontab.
 Requirements
 ------------
 
-* Python 2.7, 3.4 or 3.5
+* Python 2.7 or 3.4+
 * `six <https://pypi.python.org/pypi/six>`_
 * `crontab <https://pypi.python.org/pypi/python-crontab>`_
 * `pytz <https://pypi.python.org/pypi/pytz>`_
@@ -35,6 +35,9 @@ Example
 ^^^^^^^
 
 .. code-block:: python
+
+   from errcron import CrontabMixin
+
 
    class ClockTimer(CrontabMixin, BotPlugin):
        CRONTAB = [
@@ -62,6 +65,12 @@ Example
 
 Changes
 -------
+
+version 0.4.3
+^^^^^^^^^^^^^
+
+* Add python 3.6 for test target (compatible)
+* Can import as ``from errcron import CrontabMixin``
 
 version 0.4.1
 ^^^^^^^^^^^^^
