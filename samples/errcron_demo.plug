@@ -1,0 +1,12 @@
+[Core]
+name = Errcron
+module = errcron_demo
+
+[Documentation]
+description = Crontab implementation for Errbot(It is a demo plugin)
+
+[Python]
+version = 2+
+
+[Errbot]
+

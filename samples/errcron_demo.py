@@ -2,7 +2,7 @@ from errbot import BotPlugin, botcmd, arg_botcmd, webhook
 from errcron.bot import CrontabMixin
 
 
-class Demo(BotPlugin, CrontabMixin):
+class ErrcronDemo(BotPlugin, CrontabMixin):
     """
     demo
     """
@@ -16,7 +16,7 @@ class Demo(BotPlugin, CrontabMixin):
 
         You should delete it if you're not using it to override any default behaviour
         """
-        super(Demo, self).activate()
+        super(ErrcronDemo, self).activate()
         self.activate_crontab()
 
     def deactivate(self):
@@ -25,7 +25,7 @@ class Demo(BotPlugin, CrontabMixin):
 
         You should delete it if you're not using it to override any default behaviour
         """
-        super(Demo, self).deactivate()
+        super(ErrcronDemo, self).deactivate()
 
     def get_configuration_template(self):
         """
@@ -46,7 +46,7 @@ class Demo(BotPlugin, CrontabMixin):
 
         You should delete it if you're not using it to override any default behaviour
         """
-        super(Demo, self).check_configuration(configuration)
+        super(ErrcronDemo, self).check_configuration(configuration)
 
     def callback_connect(self):
         """
