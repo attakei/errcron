@@ -75,25 +75,20 @@ Example
 #. Run
 
 
-Changes
--------
+Latest changes
+--------------
+
+version 0.4.4
+^^^^^^^^^^^^^
+
+* Fix for latest crontab-parser
+* Fix test targets in Travis-CI
 
 version 0.4.3
 ^^^^^^^^^^^^^
 
 * Add python 3.6 for test target (compatible)
 * Can import as ``from errcron import CrontabMixin``
-
-version 0.4.1
-^^^^^^^^^^^^^
-
-* Fix missing dependencies
-
-version 0.4
-^^^^^^^^^^^
-
-* Enable class TIMEZONE definition
-* Set order of extends
 
 
 License

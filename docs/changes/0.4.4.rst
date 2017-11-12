@@ -1,0 +1,5 @@
+version 0.4.4
+=============
+
+* Fix for latest crontab-parser
+* Fix test targets in Travis-CI
