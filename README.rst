@@ -3,6 +3,18 @@ Crontab implementation for Errbot
 
 It is extention for plugin of Errbot to implement poller llike crontab.
 
+.. image:: https://img.shields.io/pypi/v/errcron.svg
+   :target: https://pypi.org/project/errcron/
+   :alt: Version in PyPI
+
+.. image:: https://img.shields.io/pypi/pyversions/errcron.svg
+   :target: https://pypi.org/project/errcron/
+   :alt: python versions
+
+.. image:: https://img.shields.io/pypi/l/errcron.svg
+   :target: https://pypi.org/project/errcron/
+   :alt: License
+
 .. image:: https://requires.io/github/attakei/errcron/requirements.svg?branch=master
      :target: https://requires.io/github/attakei/errcron/requirements/?branch=master
      :alt: Requirements Status
