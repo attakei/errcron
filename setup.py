@@ -52,10 +52,18 @@ class PyTest(TestCommand):
         sys.exit(errno)
 
 
-def find_requires(requirements):
-    reqs = read_file(os.path.join(here, requirements))
-    return reqs.strip().split()
-
+requires = {
+    'install': [
+        'six',
+        'crontab',
+        'pytz',
+    ],
+    'test': [
+        'pytest-cov',
+        'pytest',
+        'freezegun',
+    ]
+}
 
 setup(
     name='errcron',
@@ -77,9 +85,9 @@ setup(
     ],
     keywords='errbot plugin crontab',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
-    install_requires=find_requires('requirements.txt'),
-    tests_require=find_requires('tests/requirements.txt'),
-    extras_require={'test': find_requires('tests/requirements.txt')},
+    install_requires=requires['install'],
+    tests_require=requires['test'],
+    extras_require={k: v for k, v in requires.items() if k != 'install'},
     cmdclass={
         'test': PyTest,
     },
