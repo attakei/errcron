@@ -15,12 +15,21 @@ matrix:
     - python: '3.6'
       env: TOXENV=pypi
 
+before_script:
+  - if [ "$TOXENV" != 'py36' ]; then exit 0; fi
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 # Run CI
 install:
   - pip install tox
 script:
   - tox
+
+after_script:
+  - if [ "$TOXENV" != 'py36' ]; then exit 0; fi
+  - ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
 # Add ons
 
