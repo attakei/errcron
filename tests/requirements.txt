@@ -3,5 +3,3 @@ pytest-flakes
 pytest-cov
 pytest
 freezegun
-codeclimate-test-reporter
-coverage>=4.0,<4.4
