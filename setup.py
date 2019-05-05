@@ -62,6 +62,7 @@ requires = {
         'pytest-cov',
         'pytest',
         'freezegun',
+        'errbot',
     ]
 }
 
