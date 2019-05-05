@@ -1,0 +1,9 @@
+[Core]
+Name = Crontab
+Module = crontab
+
+[Documentation]
+Description = Crontab
+
+[Python]
+Version = 3
