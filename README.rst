@@ -15,9 +15,8 @@ It is extention for plugin of Errbot to implement poller llike crontab.
    :target: https://pypi.org/project/errcron/
    :alt: License
 
-.. image:: https://requires.io/github/attakei/errcron/requirements.svg?branch=master
-   :target: https://requires.io/github/attakei/errcron/requirements/?branch=master
-   :alt: Requirements Status
+.. image:: https://github.com/attakei/errcron/actions/workflows/ci.yml/badge.svg?branch=master
+   :target: https://github.com/attakei/errcron/actions/workflows/ci.yml
 
 
 Requirements
