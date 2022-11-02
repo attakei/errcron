@@ -22,7 +22,7 @@ Basic installation is to use pip.
    $ pip install errcron
 
 
-If you want to use latest master rivision, install from github.
+If you want to use latest master revision, install from github.
 
 .. code-block:: bash
 

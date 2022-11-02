@@ -33,7 +33,7 @@ Simply usage
 Crontab scheduling
 ------------------
 
-errcron use crontab like job scheduliing.
+errcron use crontab like job scheduling.
 See `crontab page in PyPI`_
 
 .. _crontab page in PyPI: https://launchpad.net/python-crontab
