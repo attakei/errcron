@@ -23,7 +23,7 @@ It is extention for plugin of Errbot to implement poller llike crontab.
 Requirements
 ------------
 
-* Python 2.7 or 3.4+
+* Python 3.6+
 * `six <https://pypi.python.org/pypi/six>`_
 * `crontab <https://pypi.python.org/pypi/python-crontab>`_
 * `pytz <https://pypi.python.org/pypi/pytz>`_
