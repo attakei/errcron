@@ -3,4 +3,4 @@ Version 0.3.0
 
 * Implement crontab format.
 * Implement be able to run instance method of plugin.
-* Change plling interval
+* Change pulling interval
