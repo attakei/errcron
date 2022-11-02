@@ -9,8 +9,8 @@ Welcome to Errcron's documentation!
 .. image:: https://img.shields.io/pypi/v/errcron.svg
    :target: https://pypi.python.org/pypi/errcron
 
-.. image:: https://travis-ci.org/attakei/errcron.svg?branch=master
-   :target: https://travis-ci.org/attakei/errcron
+.. image:: https://github.com/attakei/errcron/actions/workflows/ci.yml/badge.svg?branch=master
+   :target: https://github.com/attakei/errcron/actions/workflows/ci.yml
 
 .. image:: https://codeclimate.com/github/attakei/errcron/badges/gpa.svg
    :target: https://codeclimate.com/github/attakei/errcron

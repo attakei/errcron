@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        versions:
+          - python: "3.6"
+            toxenv: "py36"
+          - python: "3.7"
+            toxenv: "py37"
+          - python: "3.8"
+            toxenv: "py38"
+          - python: "3.9"
+            toxenv: "py39"
+          - python: "3.10"
+            toxenv: "py310"
+          - python: "3.7"
+            toxenv: "codestyle"
+          - python: "3.7"
+            toxenv: "flakes"
+          - python: "3.7"
+            toxenv: "pypi"
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.versions.python }}
+      - run: pip install tox
+      - run: tox
+        env:
+          TOXENV: ${{ matrix.versions.toxenv }}
