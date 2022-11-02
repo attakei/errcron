@@ -1,21 +1,63 @@
 local:
     build: .
 
-py27:
-    build: samples
-    dockerfile: py27/Dockerfile
-py27dev:
-    build: samples
-    dockerfile: py27dev/Dockerfile
-py34:
-    build: samples
-    dockerfile: py34/Dockerfile
-py34dev:
-    build: samples
-    dockerfile: py34dev/Dockerfile
-py35:
-    build: samples
-    dockerfile: py35/Dockerfile
-py35dev:
-    build: samples
-    dockerfile: py35dev/Dockerfile
+py36:
+    dockerfile: py/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.6
+py36dev:
+    dockerfile: pydev/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.6
+py37:
+    dockerfile: py/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.7
+py37dev:
+    dockerfile: pydev/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.7
+py38:
+    dockerfile: py/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.8
+py38dev:
+    dockerfile: pydev/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.8
+py39:
+    dockerfile: py/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.9
+py39dev:
+    dockerfile: pydev/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.9
+py310:
+    dockerfile: py/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.10
+py310dev:
+    dockerfile: pydev/Dockerfile
+    build:
+        context: samples
+        args:
+            PYTHON_VERSION: 3.10
